@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Green World Cameroun — Compléments alimentaires énergie & vitalité</title>
+<meta name="description" content="Compléments alimentaires certifiés à Yaoundé. Livraison 24h, paiement à la livraison & Mobile Money. Commandez sur WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<!-- ======================================================================
+     1. BANDEAU PROMO  (messages alternés — gérés en JS)
+     ====================================================================== -->
+<div class="promo">
+  <div class="promo-msg">Livraison <b>Yaoundé 24h</b> — Paiement à la livraison</div>
+</div>
+
+<!-- ======================================================================
+     2. HEADER
+     ====================================================================== -->
+<header class="header">
+  <div class="wrap header-row">
+
+    <a href="#" class="logo" aria-label="Green World Cameroun — accueil">
+      <img class="leaf" src="assets/logo-mark.png" alt="" aria-hidden="true">
+      Green<span>World</span>
+    </a>
+
+    <!-- Menu central desktop -->
+    <nav class="nav-main" aria-label="Navigation principale">
+      <ul>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#produits">Énergie &amp; Vitalité</a></li>
+        <li><a href="#produits">Immunité</a></li>
+        <li><a href="#pourquoi">À propos</a></li>
+        <li><a href="#faq">Blog</a></li>
+      </ul>
+    </nav>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Compte">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Panier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="cart-count" style="display:none">0</span>
+      </button>
+      <button class="icon-btn hamburger" id="hamburger" aria-label="Ouvrir le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Drawer mobile -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer" aria-label="Menu mobile">
+  <div class="drawer-head">
+    <span class="logo"><img class="leaf" src="assets/logo-mark.png" alt="" aria-hidden="true">Green<span>World</span></span>
+    <button class="icon-btn" id="drawerClose" aria-label="Fermer le menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#produits">Produits</a>
+    <a href="#produits">Énergie &amp; Vitalité</a>
+    <a href="#produits">Immunité</a>
+    <a href="#pourquoi">À propos</a>
+    <a href="#diagnostic">Diagnostic</a>
+    <a href="#faq">Blog &amp; FAQ</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="btn btn-whats btn-block" data-wa-generic target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
+      Commander sur WhatsApp
+    </a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ======================================================================
+     3. HERO
+     ====================================================================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Compléments alimentaires · Cameroun</span>
+      <h1>Retrouve ton <em>énergie</em> au quotidien</h1>
+      <p>Des compléments certifiés pour combler tes carences, booster ta vitalité et renforcer ton immunité. Livrés chez toi à Yaoundé en 24h.</p>
+      <div class="hero-cta">
+        <a href="#produits" class="btn btn-green">Je découvre mes produits</a>
+        <a href="#diagnostic" class="btn btn-ghost">Faire le diagnostic</a>
+      </div>
+      <div class="hero-trust">
+        <span class="stars">★★★★★</span>
+        <span><b>4,8/5</b> — plus de 1 200 clients à Yaoundé &amp; Douala</span>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <img src="assets/ctx-products.jpg" alt="La gamme de produits Green World" loading="lazy">
+      <div class="hero-badge">
+        <span class="dot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h13l3-9H6"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+        </span>
+        <div>
+          <b>Livraison 24h</b>
+          <small>Yaoundé · paiement à la livraison</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. BANDEAU DE RÉASSURANCE -->
+  <div class="assure">
+    <div class="wrap assure-grid">
+      <div class="assure-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h13l3-9H6"/><circle cx="8" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg></span>
+        <div><b>Livraison rapide</b><small>Yaoundé en 24h</small></div>
+      </div>
+      <div class="assure-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg></span>
+        <div><b>Paiement flexible</b><small>À la livraison ou Mobile Money</small></div>
+      </div>
+      <div class="assure-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><b>Produits certifiés</b><small>Qualité garantie</small></div>
+      </div>
+      <div class="assure-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.5 8.5 0 1 1 21 11.5Z"/></svg></span>
+        <div><b>Service client</b><small>WhatsApp réactif</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     5. PRODUITS PHARES
+     ====================================================================== -->
+<section class="section products" id="produits">
+  <div class="wrap">
+    <div class="prod-head">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Best-sellers</span>
+        <h2>Nos produits phares</h2>
+        <p>Des formules ciblées pour l'énergie, l'immunité et la récupération.</p>
+      </div>
+      <a href="#" class="btn btn-ghost">Voir tout le catalogue</a>
+    </div>
+
+    <div class="prod-grid">
+      <!-- Carte produit (réutilisable) -->
+      <!-- 1 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-cordyceps.jpg" alt="Cordyceps Plus Capsule — Green World" loading="lazy"><span class="card-tag">Énergie</span></div>
+        <div class="card-body">
+          <h3>Cordyceps</h3>
+          <p class="desc">Champignon adaptogène pour l'endurance et l'énergie naturelle.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Cordyceps">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Cordyceps">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 2 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-zinc.jpg" alt="Zinc Adulte — Green World" loading="lazy"><span class="card-tag">Immunité</span></div>
+        <div class="card-body">
+          <h3>Zinc</h3>
+          <p class="desc">Soutient les défenses immunitaires et la santé de la peau.</p>
+          <div class="price">12 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Zinc">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Zinc">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 3 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-multivitamines.jpg" alt="Multi-Vitamines — Green World" loading="lazy"><span class="card-tag">Vitalité</span></div>
+        <div class="card-body">
+          <h3>Multivitamines</h3>
+          <p class="desc">Le complexe complet pour combler les carences du quotidien.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Multivitamines">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Multivitamines">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 4 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-ginkgo.jpg" alt="Ginkgo Biloba — Green World" loading="lazy"><span class="card-tag">Concentration</span></div>
+        <div class="card-body">
+          <h3>Ginkgo Biloba</h3>
+          <p class="desc">Favorise la mémoire, la concentration et la circulation.</p>
+          <div class="price">17 500 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Ginkgo Biloba">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Ginkgo Biloba">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 5 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-fishoil.jpg" alt="Deep Sea Fish Oil — Green World" loading="lazy"><span class="card-tag">Oméga-3</span></div>
+        <div class="card-body">
+          <h3>Deep Sea Fish Oil</h3>
+          <p class="desc">Huile de poisson riche en Oméga-3 pour le cœur et le cerveau.</p>
+          <div class="price">17 500 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Deep Sea Fish Oil">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Deep Sea Fish Oil">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 6 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-arthropower.jpg" alt="Arthropower Capsule — Green World" loading="lazy"><span class="card-tag">Articulations</span></div>
+        <div class="card-body">
+          <h3>Arthropower</h3>
+          <p class="desc">Confort articulaire et souplesse pour rester actif.</p>
+          <div class="price">19 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Arthropower">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Arthropower">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 7 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-soypower.jpg" alt="Soy Power Capsule — Green World" loading="lazy"><span class="card-tag">Équilibre</span></div>
+        <div class="card-body">
+          <h3>Soy Power</h3>
+          <p class="desc">Protéines de soja pour l'équilibre hormonal et la forme.</p>
+          <div class="price">15 500 <small>FCFA</small></div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Soy Power">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Soy Power">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <!-- 8 -->
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-vigpower.jpg" alt="Vigueur Capsule — Green World" loading="lazy"><span class="card-tag">Énergie</span></div>
+        <div class="card-body">
+          <h3>Vigpower</h3>
+          <p class="desc">Tonus, vitalité et performance pour les journées intenses.</p>
+          <div class="price">18 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Vigpower">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Vigpower">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     6. POURQUOI GREEN WORLD ?
+     ====================================================================== -->
+<section class="section" id="pourquoi">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Notre mission</span>
+      <h2>Pourquoi Green World&nbsp;?</h2>
+      <p>Aider chaque Camerounais en manque d'énergie ou de vitalité à retrouver sa pleine forme, grâce à des produits de qualité, accessibles et bien sourcés.</p>
+    </div>
+
+    <div class="why-row">
+      <div class="why-media"><img src="assets/ctx-lab.jpg" alt="Contrôle qualité en laboratoire" loading="lazy"></div>
+      <div class="why-copy">
+        <h3>Une origine que l'on assure</h3>
+        <p>Nos compléments sont sélectionnés auprès de fabricants certifiés et contrôlés. Chaque lot est traçable, de la matière première au flacon.</p>
+        <ul class="why-list">
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Ingrédients naturels &amp; testés en laboratoire</li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Sans additifs inutiles</li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Conformes aux normes de qualité</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="why-row reverse">
+      <div class="why-media"><img class="contain" src="assets/ctx-delivery.png" alt="Livraison express à moto à Yaoundé" loading="lazy"></div>
+      <div class="why-copy">
+        <h3>Pensé pour le Cameroun</h3>
+        <p>Prix en FCFA, paiement à la livraison ou par Mobile Money, et commande directe sur WhatsApp. On s'adapte à ta façon d'acheter.</p>
+        <ul class="why-list">
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Livraison prioritaire à Yaoundé, extension en cours</li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Conseils personnalisés par notre équipe</li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Mobile Money &amp; Orange Money acceptés</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     7. TÉMOIGNAGES
+     ====================================================================== -->
+<section class="section testi">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Ils nous font confiance</span>
+      <h2>Ce que disent nos clients</h2>
+    </div>
+
+    <div class="testi-track-wrap">
+      <div class="testi-track" id="testiTrack">
+        <figure class="testi-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>« Reçu en moins de 24h à Yaoundé, paiement à la livraison comme promis. Je sens déjà plus d'énergie le matin. »</blockquote>
+          <figcaption class="testi-who"><span class="av">A</span><div><b>GNUPIKA Marcel</b><small>Yaoundé · Bastos</small></div></figcaption>
+        </figure>
+        <figure class="testi-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>« Le zinc a changé mes journées plus de vitalité et tonus. Commande passée sur WhatsApp en 2 minutes, super pratique. »</blockquote>
+          <figcaption class="testi-who"><span class="av">D</span><div><b>EBENE Sarah.</b><small>Douala · Akwa</small></div></figcaption>
+        </figure>
+        <figure class="testi-card">
+          <div class="stars">★★★★★</div>
+          <blockquote>« Service client au top, ils m'ont aidé à choisir avec le diagnostic. Le Cordyceps est top pour le sport. »</blockquote>
+          <figcaption class="testi-who"><span class="av">F</span><div><b>BALOMO Sonia</b><small>Yaoundé · Fouda</small></div></figcaption>
+        </figure>
+        <figure class="testi-card">
+          <div class="stars">★★★★☆</div>
+          <blockquote>« Produits de qualité et prix corrects en FCFA. J'ai payé en Mobile Money sans souci, je recommande. »</blockquote>
+          <figcaption class="testi-who"><span class="av">S</span><div><b>TALLA Serge.</b><small>Yaoundé · Nsam</small></div></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="testi-nav">
+      <button id="testiPrev" aria-label="Précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button id="testiNext" aria-label="Suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     8. DIAGNOSTIC / QUIZ
+     ====================================================================== -->
+<section class="section" id="diagnostic">
+  <div class="wrap">
+    <div class="quiz">
+      <div class="quiz-inner">
+        <span class="eyebrow">Diagnostic express</span>
+        <h2>Quel est ton besoin principal&nbsp;?</h2>
+        <p class="lead">Réponds en un clic, on te recommande les produits adaptés.</p>
+
+        <!-- Options -->
+        <div class="quiz-options" id="quizOptions">
+          <button class="quiz-opt" data-need="energie">
+            <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+            <div><b>Plus d'énergie</b><small>Fatigue, baisse de tonus</small></div>
+            <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+          </button>
+          <button class="quiz-opt" data-need="immunite">
+            <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3Z"/></svg></span>
+            <div><b>Renforcer mon immunité</b><small>Défenses, vitalité</small></div>
+            <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+          </button>
+          <button class="quiz-opt" data-need="articul">
+            <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg></span>
+            <div><b>Soulager mes articulations</b><small>Confort, mobilité</small></div>
+            <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+          </button>
+          <button class="quiz-opt" data-need="focus">
+            <span class="q-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></span>
+            <div><b>Mieux me concentrer</b><small>Mémoire, focus</small></div>
+            <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+          </button>
+        </div>
+
+        <!-- Résultat -->
+        <div class="quiz-result" id="quizResult">
+          <p class="lead" style="margin-bottom:4px">Nos recommandations pour toi&nbsp;:</p>
+          <div class="res-pills" id="resPills"></div>
+          <a href="#produits" class="btn btn-green">Voir ces produits</a>
+          <div><button class="quiz-back" id="quizBack">↩ Refaire le diagnostic</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     9. FAQ
+     ====================================================================== -->
+<section class="section" id="faq" style="background:var(--gray)">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2>On répond à tes questions</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Quels sont les délais et zones de livraison&nbsp;?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Nous livrons à Yaoundé en 24h. Douala et les autres villes sont livrées sous 48 à 72h. La zone de livraison s'étend progressivement — contacte-nous sur WhatsApp pour confirmer ta localité.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Comment puis-je payer ma commande&nbsp;?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Tu peux payer à la livraison (à la réception du colis), ou par Mobile Money et Orange Money avant l'envoi. Le paiement à la livraison est disponible à Yaoundé.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Vos produits sont-ils certifiés&nbsp;?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Oui. Tous nos compléments proviennent de fabricants certifiés et sont contrôlés en laboratoire. La composition de chaque produit est indiquée sur sa fiche et l'emballage.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Comment commander sur WhatsApp&nbsp;?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Clique sur « Commander sur WhatsApp » sur n'importe quel produit. Une conversation s'ouvre avec le produit pré-rempli — il ne te reste qu'à confirmer ton adresse et ton mode de paiement.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Puis-je être remboursé&nbsp;?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><p>Les produits non ouverts peuvent être retournés sous 7 jours. Consulte notre politique de retour ou écris-nous sur WhatsApp pour toute demande.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     10. FOOTER
+     ====================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo"><img class="leaf" src="assets/logo-mark.png" alt="" aria-hidden="true">Green<span>World</span></a>
+        <p class="about">Compléments alimentaires énergie &amp; vitalité, distribués au Cameroun. Livraison rapide, paiement flexible.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-wa-generic target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="#pourquoi">Notre mission</a></li>
+          <li><a href="#produits">Nos produits</a></li>
+          <li><a href="#diagnostic">Diagnostic</a></li>
+          <li><a href="#faq">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Aide &amp; Contact</h4>
+        <ul>
+          <li class="contact-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Z"/></svg> <a data-wa-generic target="_blank" rel="noopener">WhatsApp</a></li>
+          <li class="contact-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2 1c1 2 2.5 3.5 4.5 4.5l1-2 5 2v3c0 1-1 2-2 2A16 16 0 0 1 3 6c0-1 1-2 2-2Z"/></svg> <span data-wa-phone>+237 6 80 19 06 34</span></li>
+          <li class="contact-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> contact@greenworld.cm</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="#">CGV</a></li>
+          <li><a href="#">Politique de retour</a></li>
+          <li><a href="#">Livraison &amp; paiement</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+        <div class="pay-row">
+          <span class="pay-badge">Mobile Money</span>
+          <span class="pay-badge">Orange Money</span>
+          <span class="pay-badge">Paiement à la livraison</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Green World Cameroun. Tous droits réservés.</span>
+      <span class="madein">🇨🇲 Distribué au Cameroun</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flottant -->
+<a class="wa-float" data-wa-generic target="_blank" rel="noopener" aria-label="Commander sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
+</a>
+
+<!-- Toast panier -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg>
+  <span>Ajouté au panier</span>
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
