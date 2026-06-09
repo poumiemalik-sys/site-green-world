@@ -152,12 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (existing) { existing.qty++; } else { cartItems.push({ name, price, qty: 1 }); }
       saveCart(); renderCartCount();
       showToast(`${name} ajouté au panier`);
+      if (typeof fbq !== 'undefined') fbq('track', 'AddToCart', { content_name: name, value: price, currency: 'XAF' });
     });
   });
 
   /* Liens WhatsApp produits */
   document.querySelectorAll('[data-wa]').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (typeof fbq !== 'undefined') fbq('track', 'Contact', { content_name: btn.dataset.wa });
       window.open(waLink(`Bonjour Green World 🌿, je souhaite commander : ${btn.dataset.wa}. Est-il disponible ?`), '_blank');
     });
   });
