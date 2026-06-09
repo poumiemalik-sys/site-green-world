@@ -38,14 +38,101 @@ document.addEventListener('DOMContentLoaded', () => {
   overlay?.addEventListener('click', closeMenu);
   drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-  /* ---- 3. Panier (compteur local + toast) ---------------------------- */
-  let cart = parseInt(localStorage.getItem('gw_cart') || '0', 10);
+  /* ---- 3. Panier -------------------------------------------------------- */
+  let cartItems = [];
+  try {
+    const saved = localStorage.getItem('gw_cart_v2');
+    if (saved) cartItems = JSON.parse(saved);
+  } catch(e) { cartItems = []; }
+
+  const saveCart     = () => localStorage.setItem('gw_cart_v2', JSON.stringify(cartItems));
+  const cartCount    = () => cartItems.reduce((s, i) => s + i.qty, 0);
+  const fmtPrice     = (n) => n.toLocaleString('fr-FR') + ' FCFA';
+
   const counters = document.querySelectorAll('.cart-count');
-  const renderCart = () => counters.forEach(c => {
-    c.textContent = cart;
-    c.style.display = cart > 0 ? 'grid' : 'none';
+  const renderCartCount = () => counters.forEach(c => {
+    const n = cartCount();
+    c.textContent = n;
+    c.style.display = n > 0 ? 'grid' : 'none';
   });
-  renderCart();
+  renderCartCount();
+
+  const cartPanel        = document.getElementById('cartPanel');
+  const cartPanelOverlay = document.getElementById('cartPanelOverlay');
+  const cartEmptyEl      = document.getElementById('cartEmpty');
+  const cartContentEl    = document.getElementById('cartContent');
+  const cartItemsList    = document.getElementById('cartItemsList');
+  const cartTotalEl      = document.getElementById('cartTotal');
+
+  const renderCartPanel = () => {
+    const n = cartCount();
+    cartEmptyEl.style.display   = n === 0 ? 'flex' : 'none';
+    cartContentEl.style.display = n === 0 ? 'none' : 'flex';
+    if (n === 0) return;
+
+    cartItemsList.innerHTML = cartItems.map((item, idx) => `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <span class="cart-item-name">${item.name}</span>
+          <span class="cart-item-subtotal">${fmtPrice(item.price * item.qty)}</span>
+        </div>
+        <div class="cart-item-row2">
+          <button class="cart-qty-btn" data-idx="${idx}" data-dir="-1">−</button>
+          <span class="cart-qty">${item.qty}</span>
+          <button class="cart-qty-btn" data-idx="${idx}" data-dir="1">+</button>
+          <span class="cart-unit-price">${fmtPrice(item.price)} / u.</span>
+          <button class="cart-remove" data-idx="${idx}" aria-label="Retirer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    cartTotalEl.textContent = fmtPrice(cartItems.reduce((s, i) => s + i.price * i.qty, 0));
+
+    cartItemsList.querySelectorAll('.cart-qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx);
+        cartItems[idx].qty += parseInt(btn.dataset.dir);
+        if (cartItems[idx].qty <= 0) cartItems.splice(idx, 1);
+        saveCart(); renderCartCount(); renderCartPanel();
+      });
+    });
+    cartItemsList.querySelectorAll('.cart-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        cartItems.splice(parseInt(btn.dataset.idx), 1);
+        saveCart(); renderCartCount(); renderCartPanel();
+      });
+    });
+  };
+
+  const openCart = () => {
+    renderCartPanel();
+    cartPanel?.classList.add('open');
+    cartPanelOverlay?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeCart = () => {
+    cartPanel?.classList.remove('open');
+    cartPanelOverlay?.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelector('.icon-btn[aria-label="Panier"]')?.addEventListener('click', openCart);
+  cartPanelOverlay?.addEventListener('click', closeCart);
+  document.getElementById('cartClose')?.addEventListener('click', closeCart);
+
+  document.getElementById('cartClear')?.addEventListener('click', () => {
+    cartItems = []; saveCart(); renderCartCount(); renderCartPanel();
+  });
+
+  document.getElementById('cartWhatsApp')?.addEventListener('click', () => {
+    if (!cartItems.length) return;
+    const lines = cartItems.map(i => `• ${i.name} ×${i.qty} — ${fmtPrice(i.price * i.qty)}`).join('\n');
+    const total = cartItems.reduce((s, i) => s + i.price * i.qty, 0);
+    const msg = `Bonjour Green World 🌿, je souhaite commander :\n\n${lines}\n\nTotal : ${fmtPrice(total)}\n\nMerci !`;
+    window.open(waLink(msg), '_blank');
+  });
 
   const toast = document.getElementById('toast');
   let toastT;
@@ -59,10 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('[data-add]').forEach(btn => {
     btn.addEventListener('click', () => {
-      cart++;
-      localStorage.setItem('gw_cart', cart);
-      renderCart();
-      showToast(`${btn.dataset.add} ajouté au panier`);
+      const name  = btn.dataset.add;
+      const price = parseInt(btn.dataset.price || '0', 10);
+      const existing = cartItems.find(i => i.name === name);
+      if (existing) { existing.qty++; } else { cartItems.push({ name, price, qty: 1 }); }
+      saveCart(); renderCartCount();
+      showToast(`${name} ajouté au panier`);
     });
   });
 

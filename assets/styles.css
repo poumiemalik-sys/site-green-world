@@ -400,3 +400,45 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; letter-spa
 }
 .toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 .toast svg { width: 18px; height: 18px; color: var(--whats); }
+
+/* =========================================================================
+   CART PANEL
+   ========================================================================= */
+.cart-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  padding: 32px var(--gut); color: var(--ink-soft); gap: 10px;
+}
+.cart-empty svg { width: 52px; height: 52px; color: var(--line); }
+.cart-empty p { font-size: 15px; font-weight: 600; }
+.cart-empty small { font-size: 13px; }
+
+.cart-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.cart-items-list { flex: 1; overflow-y: auto; padding: 4px var(--gut) 0; }
+
+.cart-item { display: flex; flex-direction: column; gap: 7px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.cart-item-info { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cart-item-name { font-weight: 600; font-size: 14px; }
+.cart-item-subtotal { font-size: 14px; font-weight: 700; color: var(--green); white-space: nowrap; }
+.cart-item-row2 { display: flex; align-items: center; gap: 6px; }
+.cart-qty-btn {
+  width: 28px; height: 28px; border-radius: var(--r-pill);
+  background: var(--gray); font-size: 17px; font-weight: 700;
+  display: grid; place-items: center; line-height: 1; flex: none;
+}
+.cart-qty-btn:hover { background: var(--green-tint); color: var(--green); }
+.cart-qty { font-weight: 600; min-width: 22px; text-align: center; font-size: 15px; }
+.cart-unit-price { font-size: 12px; color: var(--ink-soft); }
+.cart-remove { margin-left: auto; color: var(--ink-soft); display: grid; place-items: center; padding: 4px; }
+.cart-remove:hover { color: #e53935; }
+.cart-remove svg { width: 15px; height: 15px; }
+
+.cart-footer { padding: 14px var(--gut) 22px; border-top: 1px solid var(--line); background: #fff; }
+.cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 15px; }
+.cart-total-row strong { font-size: 20px; color: var(--ink); }
+.cart-footer .btn { font-size: 15px; }
+.cart-clear-btn {
+  font-size: 13px; color: var(--ink-soft); text-decoration: underline;
+  margin-top: 12px; width: 100%; text-align: center; display: block;
+}
+.cart-clear-btn:hover { color: #e53935; }
