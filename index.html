@@ -47,8 +47,8 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
     <nav class="nav-main" aria-label="Navigation principale">
       <ul>
         <li><a href="#produits">Produits</a></li>
-        <li><a href="#produits">Énergie &amp; Vitalité</a></li>
-        <li><a href="#produits">Immunité</a></li>
+        <li><a href="#thes">Thés</a></li>
+        <li><a href="#catalogue">Catalogue</a></li>
         <li><a href="#pourquoi">À propos</a></li>
         <li><a href="#faq">Blog</a></li>
       </ul>
@@ -59,7 +59,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
       <button class="icon-btn" aria-label="Compte">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
       </button>
-      <button class="icon-btn" aria-label="Panier">
+      <button class="icon-btn" aria-label="Panier" data-cart-open>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
         <span class="cart-count" style="display:none">0</span>
       </button>
@@ -72,7 +72,6 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
 
 <!-- Drawer mobile -->
 <div class="drawer-overlay" id="drawerOverlay"></div>
-<!-- Cart overlay (séparé pour ne pas interférer avec le drawer) -->
 <aside class="drawer" id="drawer" aria-label="Menu mobile">
   <div class="drawer-head">
     <span class="logo"><img class="leaf" src="assets/logo-mark.png" alt="" aria-hidden="true">Green<span>World</span></span>
@@ -82,8 +81,8 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
   </div>
   <nav>
     <a href="#produits">Produits</a>
-    <a href="#produits">Énergie &amp; Vitalité</a>
-    <a href="#produits">Immunité</a>
+    <a href="#thes">Thés</a>
+    <a href="#catalogue">Catalogue</a>
     <a href="#pourquoi">À propos</a>
     <a href="#diagnostic">Diagnostic</a>
     <a href="#faq">Blog &amp; FAQ</a>
@@ -93,38 +92,6 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
       Commander sur WhatsApp
     </a>
-  </div>
-</aside>
-
-<!-- ======================================================================
-     CART PANEL
-     ====================================================================== -->
-<div class="drawer-overlay" id="cartPanelOverlay"></div>
-<aside class="drawer" id="cartPanel" aria-label="Panier">
-  <div class="drawer-head">
-    <span style="font-weight:700;font-size:17px;">Mon panier</span>
-    <button class="icon-btn" id="cartClose" aria-label="Fermer le panier">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-  </div>
-  <div id="cartEmpty" class="cart-empty">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
-    <p>Ton panier est vide.</p>
-    <small>Ajoute des produits pour commencer.</small>
-  </div>
-  <div id="cartContent" class="cart-content" style="display:none">
-    <div id="cartItemsList" class="cart-items-list"></div>
-    <div class="cart-footer">
-      <div class="cart-total-row">
-        <span>Total estimé</span>
-        <strong id="cartTotal">0 FCFA</strong>
-      </div>
-      <button class="btn btn-whats btn-block" id="cartWhatsApp">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-4-4.6-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.6-.1 1.1Z"/></svg>
-        Commander sur WhatsApp
-      </button>
-      <button id="cartClear" class="cart-clear-btn">Vider le panier</button>
-    </div>
   </div>
 </aside>
 
@@ -210,7 +177,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Champignon adaptogène pour l'endurance et l'énergie naturelle.</p>
           <div class="price">17 000 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Cordyceps" data-price="17000">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Cordyceps">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Cordyceps">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -223,7 +190,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Soutient les défenses immunitaires et la santé de la peau.</p>
           <div class="price">12 000 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Zinc" data-price="12000">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Zinc">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Zinc">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -236,7 +203,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Le complexe complet pour combler les carences du quotidien.</p>
           <div class="price">17 000 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Multivitamines" data-price="17000">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Multivitamines">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Multivitamines">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -249,7 +216,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Favorise la mémoire, la concentration et la circulation.</p>
           <div class="price">17 500 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Ginkgo Biloba" data-price="17500">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Ginkgo Biloba">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Ginkgo Biloba">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -262,7 +229,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Huile de poisson riche en Oméga-3 pour le cœur et le cerveau.</p>
           <div class="price">17 500 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Deep Sea Fish Oil" data-price="17500">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Deep Sea Fish Oil">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Deep Sea Fish Oil">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -275,7 +242,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Confort articulaire et souplesse pour rester actif.</p>
           <div class="price">19 000 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Arthropower" data-price="19000">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Arthropower">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Arthropower">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -288,7 +255,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Protéines de soja pour l'équilibre hormonal et la forme.</p>
           <div class="price">15 500 <small>FCFA</small></div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Soy Power" data-price="15500">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Soy Power">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Soy Power">Commander sur WhatsApp</button>
           </div>
         </div>
@@ -301,8 +268,318 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
           <p class="desc">Tonus, vitalité et performance pour les journées intenses.</p>
           <div class="price">18 000 FCFA</div>
           <div class="card-actions">
-            <button class="btn btn-green btn-block" data-add="Vigpower" data-price="18000">Ajouter au panier</button>
+            <button class="btn btn-green btn-block" data-add="Vigpower">Ajouter au panier</button>
             <button class="btn btn-whats btn-block" data-wa="Vigpower">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     5b. NOS THÉS GREEN WORLD
+     ====================================================================== -->
+<section class="section" id="thes" style="background:var(--green-tint)">
+  <div class="wrap">
+    <div class="prod-head">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Collection thés</span>
+        <h2>Nos Thés Green World</h2>
+        <p>Détox, digestion, minceur et prostate — une infusion pour chaque besoin.</p>
+      </div>
+    </div>
+    <div class="prod-grid">
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-pin-pollen-tea.jpg" alt="Pin Pollen Tea — Green World" loading="lazy"><span class="card-tag">Prostate</span></div>
+        <div class="card-body">
+          <h3>Pin Pollen Tea</h3>
+          <p class="desc">Immunité, équilibre hormonal et santé de la prostate.</p>
+          <div class="price">10 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Pin Pollen Tea">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Pin Pollen Tea">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-intestin-tea.jpg" alt="Intestin Tea — Green World" loading="lazy"><span class="card-tag">Détox</span></div>
+        <div class="card-body">
+          <h3>Intestin Tea</h3>
+          <p class="desc">Confort intestinal et détoxification douce au quotidien.</p>
+          <div class="price">10 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Intestin Tea">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Intestin Tea">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-kuding.jpg" alt="Kuding Tea — Green World" loading="lazy"><span class="card-tag">Détox</span></div>
+        <div class="card-body">
+          <h3>Kuding Tea</h3>
+          <p class="desc">Détox, sommeil et santé cardio-métabolique.</p>
+          <div class="price">10 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Kuding Tea">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Kuding Tea">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-pro-slim-tea.jpg" alt="Pro Slim Tea — Green World" loading="lazy"><span class="card-tag">Minceur</span></div>
+        <div class="card-body">
+          <h3>Pro Slim Tea</h3>
+          <p class="desc">Accélère le métabolisme pour une silhouette affinée.</p>
+          <div class="price">10 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Pro Slim Tea">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Pro Slim Tea">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     5c. TOUTE LA GAMME GREEN WORLD
+     ====================================================================== -->
+<section class="section products" id="catalogue">
+  <div class="wrap">
+    <div class="prod-head">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Catalogue complet</span>
+        <h2>Toute la gamme Green World</h2>
+        <p>Compléments ciblés pour la prostate, le cœur, l'immunité, la minceur et plus encore.</p>
+      </div>
+    </div>
+    <div class="prod-grid">
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-prostasure.jpg" alt="Prostasure — Green World" loading="lazy"><span class="card-tag">Prostate</span></div>
+        <div class="card-body">
+          <h3>Prostasure</h3>
+          <p class="desc">Confort urinaire et santé de la prostate.</p>
+          <div class="price">19 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Prostasure">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Prostasure">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-ganoderma.jpg" alt="Ganoderma Capsule — Green World" loading="lazy"><span class="card-tag">Immunité</span></div>
+        <div class="card-body">
+          <h3>Ganoderma Capsule</h3>
+          <p class="desc">Immunité, anti-inflammatoire et détox cellulaire.</p>
+          <div class="price">20 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Ganoderma Capsule">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Ganoderma Capsule">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-compound-marrow.jpg" alt="Compound Marrow — Green World" loading="lazy"><span class="card-tag">Vitalité</span></div>
+        <div class="card-body">
+          <h3>Compound Marrow</h3>
+          <p class="desc">Anti-fatigue, immunité et soutien articulaire.</p>
+          <div class="price">18 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Compound Marrow">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Compound Marrow">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-calcium.jpg" alt="Calcium — Green World" loading="lazy"><span class="card-tag">Os</span></div>
+        <div class="card-body">
+          <h3>Calcium</h3>
+          <p class="desc">Calcium biodisponible + vitamine D3 pour des os solides.</p>
+          <div class="price">15 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Calcium">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Calcium">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-selenium.jpg" alt="Selenium — Green World" loading="lazy"><span class="card-tag">Immunité</span></div>
+        <div class="card-body">
+          <h3>Selenium</h3>
+          <p class="desc">Immunité, thyroïde et fertilité masculine.</p>
+          <div class="price">13 500 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Selenium">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Selenium">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-glucoblock.jpg" alt="Glucoblock — Green World" loading="lazy"><span class="card-tag">Glycémie</span></div>
+        <div class="card-body">
+          <h3>Glucoblock</h3>
+          <p class="desc">Régule naturellement la glycémie (diabète type 2).</p>
+          <div class="price">13 500 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Glucoblock">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Glucoblock">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-lecithine.jpg" alt="Lécithine — Green World" loading="lazy"><span class="card-tag">Cœur</span></div>
+        <div class="card-body">
+          <h3>Lécithine</h3>
+          <p class="desc">Mémoire, cœur et détox du foie.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Lécithine">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Lécithine">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-gastric-health.jpg" alt="Gastric Health — Green World" loading="lazy"><span class="card-tag">Digestion</span></div>
+        <div class="card-body">
+          <h3>Gastric Health</h3>
+          <p class="desc">Digestion apaisée et confort gastrique.</p>
+          <div class="price">13 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Gastric Health">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Gastric Health">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-beta-carotene.jpg" alt="Bêta-Carotène — Green World" loading="lazy"><span class="card-tag">Vision</span></div>
+        <div class="card-body">
+          <h3>Bêta-Carotène</h3>
+          <p class="desc">Vision, peau et santé de la prostate.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Bêta-Carotène">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Bêta-Carotène">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-garlic-oil.jpg" alt="Garlic Oil — Green World" loading="lazy"><span class="card-tag">Cœur</span></div>
+        <div class="card-body">
+          <h3>Garlic Oil</h3>
+          <p class="desc">Cœur, immunité et équilibre métabolique.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Garlic Oil">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Garlic Oil">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-blueberry.jpg" alt="Blueberry Juice — Green World" loading="lazy"><span class="card-tag">Antioxydant</span></div>
+        <div class="card-body">
+          <h3>Blueberry Juice</h3>
+          <p class="desc">Antioxydants, immunité et vitalité.</p>
+          <div class="price">15 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Blueberry Juice">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Blueberry Juice">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-chitosan.jpg" alt="Chitosan — Green World" loading="lazy"><span class="card-tag">Minceur</span></div>
+        <div class="card-body">
+          <h3>Chitosan</h3>
+          <p class="desc">Gestion du poids et détoxification naturelle.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Chitosan">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Chitosan">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-spiruline.jpg" alt="Spiruline Plus — Green World" loading="lazy"><span class="card-tag">Énergie</span></div>
+        <div class="card-body">
+          <h3>Spiruline Plus</h3>
+          <p class="desc">Énergie, immunité et fer hautement assimilable.</p>
+          <div class="price">16 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Spiruline Plus">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Spiruline Plus">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-propolis.jpg" alt="Propolis Plus — Green World" loading="lazy"><span class="card-tag">Immunité</span></div>
+        <div class="card-body">
+          <h3>Propolis Plus</h3>
+          <p class="desc">Bouclier naturel antimicrobien et cicatrisant.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Propolis Plus">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Propolis Plus">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-ishine.jpg" alt="Ishine — Green World" loading="lazy"><span class="card-tag">Sommeil</span></div>
+        <div class="card-body">
+          <h3>Ishine</h3>
+          <p class="desc">Sommeil paisible et soulagement du stress.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Ishine">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Ishine">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-uterus-pills.jpg" alt="Uterus Pills — Green World" loading="lazy"><span class="card-tag">Féminin</span></div>
+        <div class="card-body">
+          <h3>Uterus Pills</h3>
+          <p class="desc">Nettoyage et équilibre hormonal féminin.</p>
+          <div class="price">20 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Uterus Pills">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Uterus Pills">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-cardio-power.jpg" alt="Cardio Power — Green World" loading="lazy"><span class="card-tag">Cœur</span></div>
+        <div class="card-body">
+          <h3>Cardio Power</h3>
+          <p class="desc">Tension, cholestérol et circulation sanguine.</p>
+          <div class="price">13 500 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Cardio Power">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Cardio Power">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-kidney-care-men.jpg" alt="Kidney Care Men — Green World" loading="lazy"><span class="card-tag">Reins</span></div>
+        <div class="card-body">
+          <h3>Kidney Care Men</h3>
+          <p class="desc">Santé rénale et vitalité masculine.</p>
+          <div class="price">23 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Kidney Care Men">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Kidney Care Men">Commander sur WhatsApp</button>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media"><img src="assets/prod-slimming-capsule.jpg" alt="Slimming Capsule — Green World" loading="lazy"><span class="card-tag">Minceur</span></div>
+        <div class="card-body">
+          <h3>Slimming Capsule</h3>
+          <p class="desc">Silhouette fine, métabolisme boosté.</p>
+          <div class="price">17 000 FCFA</div>
+          <div class="card-actions">
+            <button class="btn btn-green btn-block" data-add="Slimming Capsule">Ajouter au panier</button>
+            <button class="btn btn-whats btn-block" data-wa="Slimming Capsule">Commander sur WhatsApp</button>
           </div>
         </div>
       </article>
@@ -507,7 +784,7 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
         <ul>
           <li class="contact-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.9 5-1.3A10 10 0 1 0 12 2Z"/></svg> <a data-wa-generic target="_blank" rel="noopener">WhatsApp</a></li>
           <li class="contact-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2 1c1 2 2.5 3.5 4.5 4.5l1-2 5 2v3c0 1-1 2-2 2A16 16 0 0 1 3 6c0-1 1-2 2-2Z"/></svg> <span data-wa-phone>+237 6 80 19 06 34</span></li>
-          <li class="contact-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> commande.greenworld@gmail.com</li>
+          <li class="contact-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> contact@greenworld.cm</li>
         </ul>
       </div>
 
@@ -544,6 +821,40 @@ src="https://www.facebook.com/tr?id=2227771874699937&ev=PageView&noscript=1"/></
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg>
   <span>Ajouté au panier</span>
 </div>
+
+<template id="__bundler_thumbnail" data-bg-color="#2E7D32">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#2E7D32"/>
+    <g fill="#ffffff">
+      <ellipse cx="600" cy="380" rx="55" ry="150"/>
+      <path d="M600 530c-120 0-210-70-250-180 90-10 190 40 250 150 60-110 160-160 250-150-40 110-130 180-250 180Z"/>
+      <g>
+        <circle cx="600" cy="150" r="16"/>
+        <circle cx="490" cy="175" r="13"/>
+        <circle cx="710" cy="175" r="13"/>
+        <circle cx="410" cy="245" r="11"/>
+        <circle cx="790" cy="245" r="11"/>
+      </g>
+    </g>
+    <text x="600" y="700" font-family="Poppins, sans-serif" font-size="64" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="2">GREEN WORLD</text>
+  </svg>
+</template>
+
+<!-- Drawer panier -->
+<div class="drawer-overlay" id="cartOverlay"></div>
+<aside class="drawer cart-drawer" id="cartDrawer" aria-label="Panier">
+  <div class="drawer-head">
+    <span class="logo">Mon panier</span>
+    <button class="icon-btn" id="cartClose" aria-label="Fermer le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="drawer-foot cart-foot">
+    <div class="cart-total-row"><span>Total</span><b id="cartTotal">0 FCFA</b></div>
+    <button class="btn btn-whats btn-block" id="cartCheckout">Commander sur WhatsApp</button>
+  </div>
+</aside>
 
 <script src="assets/script.js"></script>
 </body>

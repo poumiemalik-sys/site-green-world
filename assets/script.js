@@ -38,99 +38,66 @@ document.addEventListener('DOMContentLoaded', () => {
   overlay?.addEventListener('click', closeMenu);
   drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-  /* ---- 3. Panier -------------------------------------------------------- */
-  let cartItems = [];
-  try {
-    const saved = localStorage.getItem('gw_cart_v2');
-    if (saved) cartItems = JSON.parse(saved);
-  } catch(e) { cartItems = []; }
-
-  const saveCart     = () => localStorage.setItem('gw_cart_v2', JSON.stringify(cartItems));
-  const cartCount    = () => cartItems.reduce((s, i) => s + i.qty, 0);
-  const fmtPrice     = (n) => n.toLocaleString('fr-FR') + ' FCFA';
+  /* ---- 3. Panier (drawer + toast) ------------------------------------ */
+  let items = {};
+  try { items = JSON.parse(localStorage.getItem('gw_cart_items') || '{}'); } catch (e) { items = {}; }
 
   const counters = document.querySelectorAll('.cart-count');
-  const renderCartCount = () => counters.forEach(c => {
+  const cartCount = () => Object.values(items).reduce((s, it) => s + it.qty, 0);
+  const cartTotal = () => Object.values(items).reduce((s, it) => s + it.qty * it.price, 0);
+  const fmt = (n) => n.toLocaleString('fr-FR');
+
+  const cartDrawer  = document.getElementById('cartDrawer');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const cartBody    = document.getElementById('cartBody');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const cartCheckout = document.getElementById('cartCheckout');
+
+  const renderCart = () => {
     const n = cartCount();
-    c.textContent = n;
-    c.style.display = n > 0 ? 'grid' : 'none';
-  });
-  renderCartCount();
-
-  const cartPanel        = document.getElementById('cartPanel');
-  const cartPanelOverlay = document.getElementById('cartPanelOverlay');
-  const cartEmptyEl      = document.getElementById('cartEmpty');
-  const cartContentEl    = document.getElementById('cartContent');
-  const cartItemsList    = document.getElementById('cartItemsList');
-  const cartTotalEl      = document.getElementById('cartTotal');
-
-  const renderCartPanel = () => {
-    const n = cartCount();
-    cartEmptyEl.style.display   = n === 0 ? 'flex' : 'none';
-    cartContentEl.style.display = n === 0 ? 'none' : 'flex';
-    if (n === 0) return;
-
-    cartItemsList.innerHTML = cartItems.map((item, idx) => `
-      <div class="cart-item">
-        <div class="cart-item-info">
-          <span class="cart-item-name">${item.name}</span>
-          <span class="cart-item-subtotal">${fmtPrice(item.price * item.qty)}</span>
-        </div>
-        <div class="cart-item-row2">
-          <button class="cart-qty-btn" data-idx="${idx}" data-dir="-1">−</button>
-          <span class="cart-qty">${item.qty}</span>
-          <button class="cart-qty-btn" data-idx="${idx}" data-dir="1">+</button>
-          <span class="cart-unit-price">${fmtPrice(item.price)} / u.</span>
-          <button class="cart-remove" data-idx="${idx}" aria-label="Retirer">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-          </button>
-        </div>
-      </div>
-    `).join('');
-
-    cartTotalEl.textContent = fmtPrice(cartItems.reduce((s, i) => s + i.price * i.qty, 0));
-
-    cartItemsList.querySelectorAll('.cart-qty-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.dataset.idx);
-        cartItems[idx].qty += parseInt(btn.dataset.dir);
-        if (cartItems[idx].qty <= 0) cartItems.splice(idx, 1);
-        saveCart(); renderCartCount(); renderCartPanel();
-      });
-    });
-    cartItemsList.querySelectorAll('.cart-remove').forEach(btn => {
-      btn.addEventListener('click', () => {
-        cartItems.splice(parseInt(btn.dataset.idx), 1);
-        saveCart(); renderCartCount(); renderCartPanel();
-      });
-    });
+    counters.forEach(c => { c.textContent = n; c.style.display = n > 0 ? 'grid' : 'none'; });
+    localStorage.setItem('gw_cart_items', JSON.stringify(items));
+    if (!cartBody) return;
+    const names = Object.keys(items);
+    if (names.length === 0) {
+      cartBody.innerHTML = '<p class="cart-empty">Votre panier est vide.</p>';
+    } else {
+      cartBody.innerHTML = names.map(name => {
+        const it = items[name];
+        return `<div class="cart-line" data-name="${name}">
+          <div class="cart-line-info"><b>${name}</b><small>${fmt(it.price)} FCFA</small></div>
+          <div class="cart-line-qty">
+            <button class="qty-btn" data-dec>−</button>
+            <span>${it.qty}</span>
+            <button class="qty-btn" data-inc>+</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    if (cartTotalEl) cartTotalEl.textContent = fmt(cartTotal()) + ' FCFA';
   };
+  renderCart();
 
-  const openCart = () => {
-    renderCartPanel();
-    cartPanel?.classList.add('open');
-    cartPanelOverlay?.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeCart = () => {
-    cartPanel?.classList.remove('open');
-    cartPanelOverlay?.classList.remove('open');
-    document.body.style.overflow = '';
-  };
-
-  document.querySelector('.icon-btn[aria-label="Panier"]')?.addEventListener('click', openCart);
-  cartPanelOverlay?.addEventListener('click', closeCart);
+  const openCart  = () => { cartDrawer?.classList.add('open'); cartOverlay?.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const closeCart = () => { cartDrawer?.classList.remove('open'); cartOverlay?.classList.remove('open'); document.body.style.overflow = ''; };
+  document.querySelectorAll('[data-cart-open]').forEach(b => b.addEventListener('click', openCart));
   document.getElementById('cartClose')?.addEventListener('click', closeCart);
+  cartOverlay?.addEventListener('click', closeCart);
 
-  document.getElementById('cartClear')?.addEventListener('click', () => {
-    cartItems = []; saveCart(); renderCartCount(); renderCartPanel();
+  cartBody?.addEventListener('click', (e) => {
+    const line = e.target.closest('.cart-line');
+    if (!line) return;
+    const name = line.dataset.name;
+    if (e.target.closest('[data-inc]')) items[name].qty++;
+    if (e.target.closest('[data-dec]')) { items[name].qty--; if (items[name].qty <= 0) delete items[name]; }
+    renderCart();
   });
 
-  document.getElementById('cartWhatsApp')?.addEventListener('click', () => {
-    if (!cartItems.length) return;
-    const lines = cartItems.map(i => `• ${i.name} ×${i.qty} — ${fmtPrice(i.price * i.qty)}`).join('\n');
-    const total = cartItems.reduce((s, i) => s + i.price * i.qty, 0);
-    const msg = `Bonjour Green World 🌿, je souhaite commander :\n\n${lines}\n\nTotal : ${fmtPrice(total)}\n\nMerci !`;
+  cartCheckout?.addEventListener('click', () => {
+    const names = Object.keys(items);
+    if (names.length === 0) return;
+    const lines = names.map(n => `- ${n} x${items[n].qty} (${fmt(items[n].price)} FCFA)`).join('\n');
+    const msg = `Bonjour Green World 🌿, je souhaite commander :\n${lines}\nTotal : ${fmt(cartTotal())} FCFA`;
     window.open(waLink(msg), '_blank');
   });
 
@@ -146,11 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('[data-add]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const name  = btn.dataset.add;
-      const price = parseInt(btn.dataset.price || '0', 10);
-      const existing = cartItems.find(i => i.name === name);
-      if (existing) { existing.qty++; } else { cartItems.push({ name, price, qty: 1 }); }
-      saveCart(); renderCartCount();
+      const name = btn.dataset.add;
+      const priceText = btn.closest('.card-body')?.querySelector('.price')?.textContent || '0';
+      const price = parseInt(priceText.replace(/[^\d]/g, ''), 10) || 0;
+      if (!items[name]) items[name] = { qty: 0, price };
+      items[name].qty++;
+      renderCart();
       showToast(`${name} ajouté au panier`);
       if (typeof fbq !== 'undefined') fbq('track', 'AddToCart', { content_name: name, value: price, currency: 'XAF' });
     });
@@ -159,8 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Liens WhatsApp produits */
   document.querySelectorAll('[data-wa]').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (typeof fbq !== 'undefined') fbq('track', 'Contact', { content_name: btn.dataset.wa });
       window.open(waLink(`Bonjour Green World 🌿, je souhaite commander : ${btn.dataset.wa}. Est-il disponible ?`), '_blank');
+      if (typeof fbq !== 'undefined') fbq('track', 'Contact', { content_name: btn.dataset.wa });
     });
   });
 
