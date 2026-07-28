@@ -222,4 +222,29 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-wa-phone]').forEach(el => {
     el.textContent = '+' + WHATSAPP.replace(/^(\d{3})(\d{1})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
   });
+
+  /* ---- 8. Suivi produit depuis une pub (?produit=slug) ---------------- */
+  const slugify = (s) => s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  const produitParam = new URLSearchParams(window.location.search).get('produit');
+  if (produitParam) {
+    const target = [...document.querySelectorAll('[data-add]')]
+      .find(btn => slugify(btn.dataset.add) === produitParam);
+    if (target) {
+      const card = target.closest('.card');
+      const priceText = card?.querySelector('.price')?.textContent || '0';
+      const price = parseInt(priceText.replace(/[^\d]/g, ''), 10) || 0;
+      setTimeout(() => {
+        card?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card?.classList.add('card-highlight');
+        setTimeout(() => card?.classList.remove('card-highlight'), 2500);
+      }, 400);
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', { content_name: target.dataset.add, content_ids: [produitParam], value: price, currency: 'XAF' });
+      }
+    }
+  }
 });
